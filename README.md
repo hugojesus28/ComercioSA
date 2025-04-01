@@ -75,29 +75,27 @@ Estrutura do Projeto:
 │   ├── Models/
 │   │   ├── Cliente.php
 │   │   └── Contato.php
-│  
 ├── database/
 │   ├── migrations/
 │   │   ├── migration_cliente.php
 │   │   └── migration_contato.php
-│
 ├── public/
 │   ├── js/
 │   │   └── script.js
 │   ├── css/
 │   │   └── style.css
-│
 ├── resources/
-│   ├── views/
-│   │   ├── master.blade.php
-│   │   ├── clientesViews/
-│   │   │   ├── index.blade.php
-│   │   │   ├── alterarCliente.blade.php
-│   │   │   └── cadastroCliente.blade.php
-│   │   ├── contatosViews/
-│   │   │   ├── index.blade.php
-│   │   │   ├── alterarContatos.blade.php
-│   │   │   └── cadastroContatos.blade.php
+├── views/
+│   ├── master.blade.php
+│   ├── clientesViews/
+│   │   ├── index.blade.php
+│   │   ├── alterarCliente.blade.php
+│   │   └── cadastroCliente.blade.php
+│   ├── contatosViews/
+│   │   ├── index.blade.php
+│   │   ├── alterarContatos.blade.php
+│   │   └── cadastroContatos.blade.php
+
 
 
 
