@@ -1,0 +1,58 @@
+-- Criar o banco de dados
+CREATE DATABASE comercio_sa;
+USE comercio_sa;
+
+-- Criar a tabela de clientes
+CREATE TABLE tb_cliente (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, -- ID no formato do Laravel
+    nomeCliente VARCHAR(100) NOT NULL,
+    cpfCliente VARCHAR(14) NOT NULL UNIQUE, -- CPF no formato XXX.XXX.XXX-XX
+    dataNascimentoCliente DATE NOT NULL,
+    logradouroCliente VARCHAR(150) NOT NULL, -- Nome da rua/avenida
+    numLogradouroCliente VARCHAR(10) NOT NULL, -- Número da residência
+    cepCliente VARCHAR(10) NOT NULL, -- CEP
+    bairroCliente VARCHAR(100) NOT NULL, -- Bairro
+    cidadeCliente VARCHAR(100) NOT NULL, -- Cidade
+    ufCliente CHAR(2) NOT NULL, -- Estado (UF)
+    complementoCliente VARCHAR(255) NULL, -- Complemento opcional
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP, -- Campos padrão do Laravel
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Criar a tabela de contatos
+CREATE TABLE tb_contato (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY, -- ID no formato do Laravel
+    idCliente BIGINT UNSIGNED NOT NULL, -- Nome seguindo convenção do Laravel
+    tipoContato VARCHAR(50) NOT NULL,
+    valorContato VARCHAR(100) NOT NULL,
+    observacaoContato VARCHAR(255) NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (idCliente) REFERENCES tb_cliente(id) ON DELETE CASCADE
+);
+
+-- Inserir clientes
+INSERT INTO tb_cliente (nomeCliente, cpfCliente, dataNascimentoCliente, logradouroCliente, numLogradouroCliente, cepCliente, bairroCliente, cidadeCliente, ufCliente, complementoCliente) VALUES
+('Ana Souza', '123.456.789-01', '1990-05-15', 'Rua das Flores', '123', '01000-000', 'Centro', 'São Paulo', 'SP', 'Apto 12'),
+('Carlos Oliveira', '234.567.890-12', '1985-08-22', 'Av. Paulista', '456', '01310-000', 'Bela Vista', 'São Paulo', 'SP', NULL),
+('Mariana Lima', '345.678.901-23', '1992-12-10', 'Rua XV de Novembro', '789', '80020-310', 'Centro', 'Curitiba', 'PR', NULL),
+('Roberto Nunes', '456.789.012-34', '1980-06-30', 'Rua das Árvores', '101', '90035-070', 'Petrópolis', 'Porto Alegre', 'RS', 'Casa fundos'),
+('Fernanda Costa', '567.890.123-45', '1995-03-25', 'Av. Brasil', '202', '30140-000', 'Savassi', 'Belo Horizonte', 'MG', NULL),
+('Diego Martins', '678.901.234-56', '1988-09-12', 'Rua Bahia', '303', '40050-370', 'Barra', 'Salvador', 'BA', NULL),
+('Patrícia Alves', '789.012.345-67', '1993-07-18', 'Av. Goiás', '404', '74605-020', 'Setor Central', 'Goiânia', 'GO', 'Bloco B'),
+('Bruno Ferreira', '890.123.456-78', '1986-11-05', 'Rua Amazonas', '505', '69050-020', 'Adrianópolis', 'Manaus', 'AM', NULL),
+('Juliana Mendes', '901.234.567-89', '1999-04-08', 'Av. Rio Branco', '606', '20040-003', 'Centro', 'Rio de Janeiro', 'RJ', NULL),
+('Fábio Santos', '012.345.678-90', '1982-01-20', 'Rua Pernambuco', '707', '60110-060', 'Aldeota', 'Fortaleza', 'CE', 'Apto 301');
+
+-- Inserir contatos
+INSERT INTO tb_contato (idCliente, tipoContato, valorContato, observacaoContato) VALUES
+(1, 'E-mail', 'ana.souza@email.com', 'E-mail principal'),
+(2, 'Telefone', '(11) 98765-4321', 'Telefone celular'),
+(3, 'WhatsApp', '(41) 99876-5432', 'Contato preferencial'),
+(4, 'E-mail', 'roberto.nunes@email.com', 'E-mail corporativo'),
+(5, 'Telefone', '(31) 91234-5678', 'Telefone residencial'),
+(6, 'E-mail', 'diego.martins@email.com', 'E-mail pessoal'),
+(7, 'WhatsApp', '(62) 97654-3210', 'Número alternativo'),
+(8, 'Telefone', '(92) 93456-7890', 'Número de contato principal'),
+(9, 'E-mail', 'juliana.mendes@email.com', 'Usado para cadastros'),
+(10, 'WhatsApp', '(85) 96543-2109', 'WhatsApp comercial');
